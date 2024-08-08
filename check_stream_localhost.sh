@@ -1,1 +1,1 @@
-vlc rtsp://localhost:18554/cam --network-caching=33
+vlc rtsp://localhost:18554/rtsp/h264 --network-caching=33

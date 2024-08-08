@@ -693,9 +693,10 @@ paths:
   # example:
   # my_camera:
   #   source: rtsp://my_camera
-  cam:
+  rtsp/h264:
     runOnInit: ffmpeg -f v4l2 -framerate 30 -input_format h264 -input_format mjpeg -i /dev/video0 -f rtsp rtsp://localhost:$RTSP_PORT/$MTX_PATH
     runOnInitRestart: yes
+  
 
   # Settings under path "all_others" are applied to all paths that
   # do not match another entry.
