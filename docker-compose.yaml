@@ -12,43 +12,16 @@ services:
     image: bluenviron/mediamtx:latest-ffmpeg
     container_name: camera
     ports:
-      - "8554:8554"  # RTSP stream for camera
+      - "18554:8554"  # RTSP stream for camera
     devices:
       - "/dev/video0:/dev/video0"  # Pass the video device to the container
+    hostname: camara-server
     networks:
       sensor-network:
         ipv4_address: 172.30.0.2
-
     volumes:
       - $PWD/mediamtx.yml:/mediamtx.yml
     environment:
-      - RTP_PORT=8000
       - RTSP_PORT=8554
       - MTX_PATH="camera"
       - MTX_PROTOCOLS=tcp,udp
-
-  lidar:
-    image: bluenviron/mediamtx:latest-ffmpeg
-    container_name: lidar
-    ports:
-      - "8555:8555"  # RTSP stream for LiDAR
-    environment:
-      - RTSP_PORT=8555
-      - RTSP_STREAM_TYPE=video
-    networks:
-      sensor-network:
-        ipv4_address: 172.30.0.3
-
-  yolox:
-    image: ultralytics/ultralytics:latest-cpu
-    container_name: yolox
-    ports:
-      - "8080:8080"  # YOLOX output
-    environment:
-      - CAMERA_RTSP_URL=rtsp://camera:8554/mystream
-    depends_on:
-      - camera
-    networks:
-      sensor-network:
-        ipv4_address: 172.30.0.4
-

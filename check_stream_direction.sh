@@ -1,0 +1,1 @@
+vlc rtsp://172.30.0.2:8554/cam --network-caching=33
